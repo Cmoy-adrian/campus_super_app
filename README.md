@@ -17,4 +17,10 @@ The purpose of the project is to simplify campus navigation, improve student eng
 ## Setup and Deployment Instructions
 1. Clone the repository:  
    ```bash
-   git clone 
+   git clone https://github.com/username/campus_super_app.git
+2. Navigate to the project folder:
+   ```bash
+   cd campus_super_app
+3. Open index.html in your web browser to view the website.
+
+**Also deployed on GitHub Pages**
