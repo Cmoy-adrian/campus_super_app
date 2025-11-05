@@ -1,3 +1,26 @@
+console.log("Script loaded");
+
+//Map loader
+window.onload = function() {
+    mapboxgl.accessToken = 'pk.eyJ1IjoiY21veTA3IiwiYSI6ImNtaG1pbzYybjBldGIyanB2cWc5d3I2bWwifQ.Dt6Kn6SgzBmKqw4rPx1T_A';
+
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center: [-84.059, 41.899], // Cords for center of AC
+        zoom: 14
+    });
+
+    // Add zoom + rotate controls
+    map.addControl(new mapboxgl.NavigationControl());
+
+    // Optional: marker
+    new mapboxgl.Marker()
+        .setLngLat([-84.059, 41.899])
+        .setPopup(new mapboxgl.Popup().setHTML("<h4>Sample Event Location</h4>"))
+        .addTo(map);
+};
+
 // EVENT Calendar Initialization
 document.addEventListener('DOMContentLoaded', function() {
 
