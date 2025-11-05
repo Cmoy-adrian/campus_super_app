@@ -29,7 +29,35 @@ document.addEventListener('DOMContentLoaded', function() {
                 start: '2025-11-21T19:30',
             },
         ]
+
+        // Eventually add event click-ability and their info pop ups in the info tab
     });
 
     calendar.render();
+
+    // Add event button
+    document.getElementById('add_event_btn').addEventListener('click', function () {
+        const title = document.getElementById('event_title').value;
+        const date = document.getElementById('event_date').value;
+        const time = document.getElementById('event_time').value;
+
+        if (!title || !date || !time) {
+            alert("Please fill out all fields.");
+            return;
+        }
+
+        const startDateTime = `${date}T${time}`;
+
+        // Add event to calendar
+        calendar.addEvent({
+            title: title,
+            start: startDateTime
+        });
+
+        // Clear form
+        document.getElementById('event_title').value = "";
+        document.getElementById('event_date').value = "";
+        document.getElementById('event_time').value = "";
+    });
 });
+

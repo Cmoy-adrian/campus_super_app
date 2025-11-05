@@ -145,7 +145,7 @@
                                 </li>
                             </ul>
                             <!--Tab Content-->
-                            <div class="container-fluid bg-body-secondary border rounded border-dark border-2 py-2" style="width: 700px; height: 600px;">
+                            <div class="container-fluid bg-body-secondary border rounded border-dark border-4 py-2" style="width: 700px; height: 600px;">
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active" id="summary-tab-pane" role="tabpanel" aria-labelledby="summary-tab" tabindex="0">
                                         <p>...</p>
@@ -163,6 +163,25 @@
                             </div>
                         </nav>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!--New Event Form-->
+        <section id="new_event_form">
+            <div class="container-fluid w-75 bg-dark-subtle mb-4 p-4 border rounded border-dark border-4">
+                <div id="form_creator">
+                    <h3>Add New Event*</h3>
+
+                    <input type="text" id="event_title" placeholder="Event Title" class="form-control mb-2">
+
+                    <input type="date" id="event_date" class="form-control mb-2">
+
+                    <input type="time" id="event_time" class="form-control mb-2">
+
+                    <button id="add_event_btn" class="btn btn-primary w-100">Add Event</button>
+                    <p>*Only adds event locally.</p> <!--Disclaimer-->
+
                 </div>
             </div>
         </section>
