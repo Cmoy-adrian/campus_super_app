@@ -1,7 +1,6 @@
 
 /*Calendar formatting*/
 #calendar_container {
-    max-width: 750px;   /* Change to whatever size you want */
     padding: 20px;
 }
 
