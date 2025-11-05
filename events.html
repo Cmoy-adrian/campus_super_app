@@ -121,8 +121,16 @@
 
         <!--Calendar, Event Info, & Info Tabs-->
         <section>
-            <div id="calendar_container" class="bg-body-secondary border rounded border-dark border-4 mb-4 mx-4">
-                <div id="event_calendar"></div>
+            <div id="calendar_layout" class="container-fluid">
+                <div class="row mb-4">
+                    <div id="calendar_container" class="col bg-body-secondary border rounded border-dark border-4 ms-4">
+                        <div id="event_calendar"></div>
+                    </div>
+                    <div id="event_info" class="col">
+                        <h3>Event Info</h3>
+                        <p>Select an event to see details.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
