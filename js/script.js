@@ -1,4 +1,4 @@
-//Calendar Initialization
+// EVENT Calendar Initialization
 document.addEventListener('DOMContentLoaded', function() {
 
     const calendarEl = document.getElementById('event_calendar');
@@ -61,3 +61,34 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// DINING Calendar Initialization
+document.addEventListener('DOMContentLoaded', function() {
+
+    const calendarEl = document.getElementById('dining_calendar');
+
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        
+        buttonText: {
+            today: 'Today',
+            month: 'Month',
+            week: 'Week',
+            day: 'Day'
+        },
+        
+        events: [ //Future Events added here for testing
+            {
+                title: 'Monkey Bread!',
+                date: '2025-11-15'
+            },
+        ]
+
+    });
+
+    calendar.render();
+});
