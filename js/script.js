@@ -17,7 +17,7 @@ window.onload = function() {
     // Optional: marker
     new mapboxgl.Marker()
         .setLngLat([-84.059, 41.899])
-        .setPopup(new mapboxgl.Popup().setHTML("<h4>Sample Event Location</h4>"))
+        .setPopup(new mapboxgl.Popup().setHTML("<h4>Adrian College</h4>"))
         .addTo(map);
 };
 
