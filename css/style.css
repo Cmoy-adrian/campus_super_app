@@ -1,4 +1,19 @@
+
+/*Calendar formatting*/
 #calendar_container {
     max-width: 750px;   /* Change to whatever size you want */
     padding: 20px;
+}
+
+/* Weekday header text */
+.fc .fc-col-header-cell-cushion {
+    color: #000 !important;
+    font-weight: bold !important;
+    text-decoration: none !important;
+}
+
+/* Day numbers */
+.fc .fc-daygrid-day-number {
+    color: #000 !important;
+    text-decoration: none !important;
 }
