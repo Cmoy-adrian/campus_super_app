@@ -92,3 +92,53 @@ document.addEventListener('DOMContentLoaded', function() {
 
     calendar.render();
 });
+
+// Temporary in-memory storage (deleted on refresh)
+let posts = [];
+
+// Handle form submit
+document.getElementById("postForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const title = document.getElementById("post_title").value;
+    const user = document.getElementById("post_user").value;
+    const category = document.getElementById("post_category").value;
+    const body = document.getElementById("post_body").value;
+
+    // Create post object
+    const post = {
+        title,
+        user,
+        category,
+        body,
+        time: new Date().toLocaleString()
+    };
+
+    // Store in memory only
+    posts.push(post);
+
+    // Re-render posts
+    renderPosts();
+
+    // Reset form fields
+    document.getElementById("postForm").reset();
+});
+
+function renderPosts() {
+    const container = document.getElementById("post_list");
+    container.innerHTML = ""; // Clear previous posts
+
+    posts.forEach(post => {
+        const card = document.createElement("div");
+        card.classList = "card p-3 mb-3 border-dark border-3";
+
+        card.innerHTML = `
+            <h4>${post.title}</h4>
+            <p class="text-muted mb-1">Posted by <strong>${post.user}</strong> in <em>${post.category}</em></p>
+            <p class="text-muted">${post.time}</p>
+            <p>${post.body}</p>
+        `;
+
+        container.appendChild(card);
+    });
+}

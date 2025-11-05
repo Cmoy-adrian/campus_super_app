@@ -56,7 +56,69 @@
     </header>
 
     <main>
+        <!--Collapsing Form: New Post-->
+        <section>
+            <div class="container-fluid text-center mb-4">
+                <p>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#new_post_form" aria-expanded="false" aria-controls="new_post">
+                        Make New Post!
+                    </button>
+                </p>
+                <div class="collapse" id="new_post_form">
+                    <div class="card card-body bg-body-secondary border rounded border-dark border-4">
+                        <h3 class="mb-3">Create a New Post</h3>
 
+                        <form id="postForm">
+
+                            <!-- Title -->
+                            <input type="text" 
+                                id="post_title" 
+                                placeholder="Post Title" 
+                                class="form-control mb-3" 
+                                required>
+
+                            <!-- Username -->
+                            <input type="text" 
+                                id="post_user" 
+                                placeholder="Your Name" 
+                                class="form-control mb-3" 
+                                required>
+
+                            <!-- Category -->
+                            <select id="post_category" class="form-control mb-3" required>
+                                <option value="" disabled selected>Select Category</option>
+                                <option>General</option>
+                                <option>Events</option>
+                                <option>Housing</option>
+                                <option>Dining</option>
+                                <option>Campus Life</option>
+                            </select>
+
+                            <!-- Body text -->
+                            <textarea id="post_body" 
+                                    class="form-control mb-3" 
+                                    rows="4" 
+                                    placeholder="Write your post here..." 
+                                    required></textarea>
+
+                            <!-- Submit -->
+                            <button type="submit" class="btn btn-success w-100">
+                                Submit Post
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--Latest Post--> <!--Add filtering, local storage, comment system, and like button.-->
+        <section id="posts_section">
+            <div class="container-fluid">
+                <h3 class="mb-4">Latest Posts</h3>
+                <div id="post_list"></div>
+            </div>
+        </section>
     </main>
     
     <footer class="py-4 bg-primary">
