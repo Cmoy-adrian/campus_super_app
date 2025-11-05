@@ -19,8 +19,15 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         
         events: [ //Future Events added here for testing
-            { title: 'Math Club Meeting', date: '2025-11-15' },
-            { title: 'Basketball Game', date: '2025-11-21' }
+            {
+                title: 'Math Club Meeting',
+                start: '2025-11-15T14:00',
+                end:  '2025-11-15T16:00'
+            },
+            {
+                title: 'Basketball Game', 
+                start: '2025-11-21T19:30',
+            },
         ]
     });
 
