@@ -94,7 +94,17 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Temporary in-memory storage (deleted on refresh)
-let posts = [];
+let posts = [
+    {
+        title: "Welcome to the Student Forums!",
+        user: "Admin",
+        category: "General",
+        body: "This is a sample post to show how posts will appear here.",
+        time: new Date().toLocaleString()
+    }
+];
+
+renderPosts();
 
 // Handle form submit
 document.getElementById("postForm").addEventListener("submit", function(e) {
