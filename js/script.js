@@ -207,16 +207,22 @@ document.addEventListener('DOMContentLoaded', function() {
     calendar.render();
 });
 
-// Temporary in-memory storage (deleted on refresh)
-let posts = [
+// Load existing posts from localStorage OR use default sample
+let posts = JSON.parse(localStorage.getItem("forum_posts")) || [
     {
         title: "Welcome to the Student Forums!",
         user: "Admin",
         category: "General",
         body: "This is a sample post to show how posts will appear here.",
-        time: new Date().toLocaleString()
+        time: new Date().toLocaleString(),
+        upvotes: 0,
+        comments: []
     }
 ];
+
+function savePosts() {
+    localStorage.setItem("forum_posts", JSON.stringify(posts));
+};
 
 renderPosts();
 
@@ -230,16 +236,19 @@ document.getElementById("postForm").addEventListener("submit", function(e) {
     const body = document.getElementById("post_body").value;
 
     // Create post object
-    const post = {
+        const post = {
         title,
         user,
         category,
         body,
-        time: new Date().toLocaleString()
+        time: new Date().toLocaleString(),
+        upvotes: 0,
+        comments: []
     };
 
-    // Store in memory only
-    posts.push(post);
+    posts.unshift(post); // new posts appear at top
+    savePosts();
+    renderPosts();
 
     // Re-render posts
     renderPosts();
@@ -250,19 +259,60 @@ document.getElementById("postForm").addEventListener("submit", function(e) {
 
 function renderPosts() {
     const container = document.getElementById("post_list");
-    container.innerHTML = ""; // Clear previous posts
+    container.innerHTML = "";
 
-    posts.forEach(post => {
+    posts.forEach((post, index) => {
         const card = document.createElement("div");
         card.classList = "card p-3 mb-3 border-dark border-3";
 
         card.innerHTML = `
             <h4>${post.title}</h4>
-            <p class="text-muted mb-1">Posted by <strong>${post.user}</strong> in <em>${post.category}</em></p>
+            <p class="text-muted mb-1">
+                Posted by <strong>${post.user}</strong>
+                in <em>${post.category}</em>
+            </p>
             <p class="text-muted">${post.time}</p>
             <p>${post.body}</p>
+
+            <!-- Upvote Button -->
+            <button class="btn btn-outline-dark btn-sm mb-2" onclick="upvote(${index})">
+                👍 ${post.upvotes}
+            </button>
+
+            <!-- Comment Section -->
+            <div class="mt-3">
+                <h6>Comments</h6>
+                <div id="comments_${index}">
+                    ${post.comments.map(c => `<p class="ms-3">• ${c}</p>`).join("")}
+                </div>
+
+                <input id="comment_input_${index}" 
+                       class="form-control form-control-sm mt-2" 
+                       placeholder="Add a comment...">
+
+                <button class="btn btn-secondary btn-sm mt-2" onclick="addComment(${index})">
+                    Post Comment
+                </button>
+            </div>
         `;
 
         container.appendChild(card);
     });
+}
+
+function upvote(index) {
+    posts[index].upvotes++;
+    savePosts();
+    renderPosts();
+}
+
+function addComment(index) {
+    const input = document.getElementById(`comment_input_${index}`);
+    const text = input.value.trim();
+
+    if (!text) return;
+
+    posts[index].comments.push(text);
+    savePosts();
+    renderPosts();
 }
