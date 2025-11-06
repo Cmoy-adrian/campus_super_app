@@ -14,6 +14,35 @@ The purpose of the project is to simplify campus navigation, improve student eng
 
 ---
 
+## Feature List & How to Use Them
+* Campus Map
+   * Displays campus location.
+   * Click Marker to view location.
+* Individual Maps
+   * View specialized maps for specific locations on campus.
+* Event Calendar
+   * View upcoming events by day, week, or month.
+   * Add test events using the “Add Event” form (stored in local storage).
+* Dining Calendar
+   * View what is available at each dining location depending on the time of day.
+* Dining Menus
+   * Browse dining hall menus with images and descriptions.
+* Student Forms
+   * Create & view posts.
+   * Posts are stored locally for testing purposes.
+
+---
+
+## Future Improvements/ Stretch Goals
++ Implement persistent database support for events and forum posts
++ Add user authentication and profiles
++ Event/ Forums filtering and search by category
++ Make the layout fully responsive and mobile-friendly
++ Push notifications for upcoming events
++ Comment & like system for forums
+  
+---
+
 ## Setup and Deployment Instructions
 1. Clone the repository:  
    ```bash
