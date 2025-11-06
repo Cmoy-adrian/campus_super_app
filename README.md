@@ -23,6 +23,7 @@ The purpose of the project is to simplify campus navigation, improve student eng
 * Event Calendar
    * View upcoming events by day, week, or month.
    * Add test events using the “Add Event” form (stored in local storage).
+   * Click on events to view more information in the side panel.
 * Dining Calendar
    * View what is available at each dining location depending on the time of day.
 * Dining Menus
