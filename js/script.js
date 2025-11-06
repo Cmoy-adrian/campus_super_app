@@ -59,21 +59,54 @@ document.addEventListener('DOMContentLoaded', function() {
             },
         ],
 
+        // Connect Calendar to Info Panel.
         eventClick: function (info) {
-            // Prevent calendar from navigating
             info.jsEvent.preventDefault();
 
-            // Update tab content
-            document.querySelector('#summary-tab-pane p').textContent =
-                info.event.extendedProps.description ?? 'No description provided.';
+            // Format start & end times
+            const start = info.event.start;
+            const end = info.event.end;
 
-            document.querySelector('#profile-tab-pane p').textContent =
-                info.event.extendedProps.hostProfile ?? 'No host profile available.';
+            const formatOptions = {
+                weekday: 'short',
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit'
+            };
 
-            document.querySelector('#contact-tab-pane p').textContent =
-                info.event.extendedProps.hostContact ?? 'No contact info available.';
+            const startStr = start ? start.toLocaleString([], formatOptions) : "No start time";
+            const endStr   = end ? end.toLocaleString([], formatOptions) : "No end time specified";
 
-            // Switch to the "Summary" tab when event is clicked
+            // Summary tab
+            const summaryHTML = `
+                <strong>${info.event.title}</strong><br>
+                <strong>Starts:</strong> ${startStr}<br>
+                <strong>Ends:</strong> ${endStr}<br><br>
+                <strong>Description:</strong><br>
+                ${info.event.extendedProps.description ?? 'No description provided.'}
+            `;
+
+            document.querySelector('#summary-tab-pane').innerHTML = summaryHTML;
+
+            // Host Profile tab
+            const profileHTML = `
+                <strong>Host Profile</strong><br><br>
+                ${info.event.extendedProps.hostProfile ?? 'No host profile available.'}
+            `;
+
+            document.querySelector('#profile-tab-pane').innerHTML = profileHTML;
+
+            // Host Contact tab
+            const contactHTML = `
+                <strong>Contact Information</strong><br><br>
+                ${info.event.extendedProps.hostContact ?? 'No contact information available.'}
+            `;
+
+            document.querySelector('#contact-tab-pane').innerHTML = contactHTML;
+
+            // Switch to Summary tab
             const trigger = document.querySelector('#summary-tab');
             const tab = new bootstrap.Tab(trigger);
             tab.show();
@@ -83,6 +116,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     calendar.render();
 
+    // Auto-fill End Date/Time Function
+    function updateEndFields() {
+        const startDate = document.getElementById('event_start_date').value;
+        const startTime = document.getElementById('event_start_time').value;
+
+        if (!startDate || !startTime) return;
+
+        const start = new Date(`${startDate}T${startTime}`);
+        const end = new Date(start.getTime() + 60 * 60 * 1000); // +1 hour
+
+        document.getElementById('event_end_date').value = end.toISOString().slice(0, 10);
+        document.getElementById('event_end_time').value = end.toTimeString().slice(0, 5);
+    }
+
+    // Listen for start date/time changes
+    document.getElementById('event_start_date').addEventListener('change', updateEndFields);
+    document.getElementById('event_start_time').addEventListener('change', updateEndFields);
+
+    // Add Event Form (Button functionality)
     document.getElementById('add_event_btn').addEventListener('click', function () {
         const title = document.getElementById('event_title').value;
 
@@ -92,8 +144,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const endDate = document.getElementById('event_end_date').value;
         const endTime = document.getElementById('event_end_time').value;
 
+        const eventDes = document.getElementById('event_description').value;
+
         // Validate required fields
-        if (!title || !startDate || !startTime || !endDate || !endTime) {
+        if (!title || !startDate || !startTime || !endDate || !endTime || !eventDes) {
             alert("Please fill out all fields (start & end).");
             return;
         }
@@ -111,12 +165,14 @@ document.addEventListener('DOMContentLoaded', function() {
         calendar.addEvent({
             title: title,
             start: startDateTime,
-            end: endDateTime
+            end: endDateTime,
+            description: eventDes,
         });
 
         // Clear form
-        document.querySelectorAll('#new_event_form input').forEach(i => i.value = "");
+        document.querySelectorAll('#new_event_form input, #new_event_form textarea').forEach(i => i.value = "");
     });
+    
 });
 
 // DINING Calendar Initialization
