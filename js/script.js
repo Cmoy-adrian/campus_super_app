@@ -45,42 +45,77 @@ document.addEventListener('DOMContentLoaded', function() {
             {
                 title: 'Math Club Meeting',
                 start: '2025-11-15T14:00',
-                end:  '2025-11-15T16:00'
+                end:  '2025-11-15T16:00',
+                description: 'Meetings held every week. Join if you like to stretch your math mind!',
+                hostProfile: 'Current Math Grads',
+                hostContact: 'Curr_Math_Grads@university.edu',
             },
             {
                 title: 'Basketball Game', 
                 start: '2025-11-21T19:30',
+                description: 'Come watch the warthogs play against the reigning champs: the Bumblebees! Concessions are available on the stadiums main floor.',
+                hostProfile: 'Campus Sports',
+                hostContact: 'sports@university.edu',
             },
-        ]
+        ],
 
-        // Eventually add event click-ability and their info pop ups in the info tab
+        eventClick: function (info) {
+            // Prevent calendar from navigating
+            info.jsEvent.preventDefault();
+
+            // Update tab content
+            document.querySelector('#summary-tab-pane p').textContent =
+                info.event.extendedProps.description ?? 'No description provided.';
+
+            document.querySelector('#profile-tab-pane p').textContent =
+                info.event.extendedProps.hostProfile ?? 'No host profile available.';
+
+            document.querySelector('#contact-tab-pane p').textContent =
+                info.event.extendedProps.hostContact ?? 'No contact info available.';
+
+            // Switch to the "Summary" tab when event is clicked
+            const trigger = document.querySelector('#summary-tab');
+            const tab = new bootstrap.Tab(trigger);
+            tab.show();
+        }
+
     });
 
     calendar.render();
 
-    // Add event button
     document.getElementById('add_event_btn').addEventListener('click', function () {
         const title = document.getElementById('event_title').value;
-        const date = document.getElementById('event_date').value;
-        const time = document.getElementById('event_time').value;
 
-        if (!title || !date || !time) {
-            alert("Please fill out all fields.");
+        const startDate = document.getElementById('event_start_date').value;
+        const startTime = document.getElementById('event_start_time').value;
+
+        const endDate = document.getElementById('event_end_date').value;
+        const endTime = document.getElementById('event_end_time').value;
+
+        // Validate required fields
+        if (!title || !startDate || !startTime || !endDate || !endTime) {
+            alert("Please fill out all fields (start & end).");
             return;
         }
 
-        const startDateTime = `${date}T${time}`;
+        const startDateTime = `${startDate}T${startTime}`;
+        const endDateTime = `${endDate}T${endTime}`;
 
-        // Add event to calendar
+        // Make sure end date is after start date
+        if (new Date(endDateTime) <= new Date(startDateTime)) {
+            alert("End time must be after start time.");
+            return;
+        }
+
+        // Add event to FullCalendar
         calendar.addEvent({
             title: title,
-            start: startDateTime
+            start: startDateTime,
+            end: endDateTime
         });
 
         // Clear form
-        document.getElementById('event_title').value = "";
-        document.getElementById('event_date').value = "";
-        document.getElementById('event_time').value = "";
+        document.querySelectorAll('#new_event_form input').forEach(i => i.value = "");
     });
 });
 
