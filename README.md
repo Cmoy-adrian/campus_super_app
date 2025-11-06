@@ -40,6 +40,7 @@ The purpose of the project is to simplify campus navigation, improve student eng
 + Event/ Forums filtering and search by category
 + Make the layout fully responsive and mobile-friendly
 + Push notifications for upcoming events
++ Website-wide search base
   
 ---
 
