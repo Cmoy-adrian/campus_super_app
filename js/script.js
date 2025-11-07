@@ -227,7 +227,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 diningHall: 'Main Dining Hall',
                 description: 'Fresh baked Monkey Bread served warm!',
             },
+            {
+                title: 'Chicken Alfredo',
+                date: '2025-11-22',
+                diningHall: 'North Hall',
+                description: 'Creamy Alfredo served fresh.',
+            },
+            {
+                title: 'Spaghetti',
+                date: '2025-11-25',
+                diningHall: 'South Hall',
+                description: 'Spaghetti served with homemade meat sauce.',
+            },
         ],
+
+        eventClassNames: function(arg) {
+            const hall = arg.event.extendedProps.diningHall;
+            if (hall === 'Main Dining Hall') return ['event-main'];
+            if (hall === 'North Hall') return ['event-north'];
+            if (hall == 'South Hall') return ['event-south'];
+            return [];
+        },
 
         eventDidMount: function(info) {
             const hall = info.event.extendedProps.diningHall;

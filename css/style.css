@@ -29,6 +29,24 @@ footer {
     text-decoration: none !important;
 }
 
+/*Dining Calendar*/
+.event-main {
+    background-color: #ff0000 !important;
+    border-color: #ff0000 !important;
+    color: white !important;
+}
+
+.event-north {
+    background-color: #3f51b5 !important;
+    color: white !important;
+}
+
+.event-south * {
+    background-color: yellow !important;
+    border-color: yellow !important;
+    color: black !important;
+}
+
 /*Carousel Features*/
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
