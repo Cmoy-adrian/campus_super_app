@@ -57,6 +57,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 hostProfile: 'Campus Sports',
                 hostContact: 'sports@university.edu',
             },
+            {
+                title: 'Halloween Celebration', 
+                start: '2025-10-31',
+                description: 'This year we are celebrating halloween with a scavenger hunt & trick or treating!',
+                hostProfile: 'Campus Festivities',
+                hostContact: 'festivities@university.edu',
+            },
+            {
+                title: 'Dios de Los Muertos', 
+                start: '2025-11-01',
+                end: '2025-11-02T11:59',
+                description: 'Celebrate the Day of The Dead with us!',
+                hostProfile: 'Campus Festivities',
+                hostContact: 'festivities@university.edu',
+            },
+            {
+                title: 'Winter Festival', 
+                start: '2025-12-12',
+                end: '2025-12-15T11:59',
+                description: 'Join us for games, food, and other festivities as we celebrate the winter season!',
+                hostProfile: 'Campus Festivities',
+                hostContact: 'festivities@university.edu',
+            },
         ],
 
         // Connect Calendar to Info Panel.
