@@ -1,3 +1,4 @@
+/* Body CSS*/
 html, body {
     height: 100%;
 }
@@ -11,7 +12,8 @@ footer {
     margin-top: auto;
 }
 
-/*Calendar formatting*/
+
+/*Calendar formatting CSS*/
 #calendar_container {
     padding: 20px;
 }
@@ -29,7 +31,7 @@ footer {
     text-decoration: none !important;
 }
 
-/*Dining Calendar*/
+/*Dining calendar dynamic coloring CSS*/
 .event-main {
     background-color: #ff0000 !important;
     border-color: #ff0000 !important;
@@ -46,6 +48,7 @@ footer {
     border-color: yellow !important;
     color: black !important;
 }
+
 
 /*Carousel Features*/
 .carousel-control-prev-icon,

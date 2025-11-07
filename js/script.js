@@ -1,5 +1,7 @@
 console.log("Script loaded");
 
+//////////////////////////////////////////////
+
 //Map loader
 window.onload = function() {
     mapboxgl.accessToken = 'pk.eyJ1IjoiY21veTA3IiwiYSI6ImNtaG1pbzYybjBldGIyanB2cWc5d3I2bWwifQ.Dt6Kn6SgzBmKqw4rPx1T_A';
@@ -21,6 +23,8 @@ window.onload = function() {
         .addTo(map);
 };
 
+//////////////////////////////////////////////
+
 // EVENT Calendar Initialization
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -41,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
             day: 'Day'
         },
         
-        events: [ //Future Events added here for testing
+        events: [ //Events that show up on calendar
             {
                 title: 'Math Club Meeting',
                 start: '2025-11-15T14:00',
@@ -198,6 +202,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
 });
 
+//////////////////////////////////////////////
+
 // DINING Calendar Initialization
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -220,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         
         
-        events: [ //Future Events added here for testing
+        events: [ // Events that show up on the calendar
             {
                 title: 'Monkey Bread!',
                 date: '2025-11-15',
@@ -241,6 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
             },
         ],
 
+        // Changes event color depending on hall
         eventClassNames: function(arg) {
             const hall = arg.event.extendedProps.diningHall;
             if (hall === 'Main Dining Hall') return ['event-main'];
@@ -249,6 +256,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return [];
         },
 
+        // Adds pop-up when hovering over event
         eventDidMount: function(info) {
             const hall = info.event.extendedProps.diningHall;
             const desc = info.event.extendedProps.description;
@@ -271,6 +279,8 @@ document.addEventListener('DOMContentLoaded', function() {
     calendar.render();
 });
 
+//////////////////////////////////////////////
+
 // Load existing posts from localStorage OR use default sample
 let posts = JSON.parse(localStorage.getItem("forum_posts")) || [
     {
@@ -284,6 +294,7 @@ let posts = JSON.parse(localStorage.getItem("forum_posts")) || [
     }
 ];
 
+// Saves post to local storage
 function savePosts() {
     localStorage.setItem("forum_posts", JSON.stringify(posts));
 };
@@ -321,6 +332,7 @@ document.getElementById("postForm").addEventListener("submit", function(e) {
     document.getElementById("postForm").reset();
 });
 
+// Function to render user made posts
 function renderPosts() {
     const container = document.getElementById("post_list");
     container.innerHTML = "";
@@ -329,6 +341,7 @@ function renderPosts() {
         const card = document.createElement("div");
         card.classList = "card p-3 mb-3 border-dark border-3";
 
+        // Formatting of posts
         card.innerHTML = `
             <h4>${post.title}</h4>
             <p class="text-muted mb-1">
@@ -364,12 +377,14 @@ function renderPosts() {
     });
 }
 
+// Function for upvotes
 function upvote(index) {
     posts[index].upvotes++;
     savePosts();
     renderPosts();
 }
 
+// Function for comments
 function addComment(index) {
     const input = document.getElementById(`comment_input_${index}`);
     const text = input.value.trim();
@@ -380,3 +395,5 @@ function addComment(index) {
     savePosts();
     renderPosts();
 }
+
+//////////////////////////////////////////////
