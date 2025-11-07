@@ -26,10 +26,12 @@ The purpose of the project is to simplify campus navigation, improve student eng
    * Click on events to view more information in the side panel.
 * Dining Calendar
    * View what is available at each dining location depending on the time of day.
+   * Hover on calendar items to view a description.
 * Dining Menus
    * Browse dining hall menus with images and descriptions.
 * Student Forms
    * Create & view posts.
+   * Comment & like posts.
    * Posts are stored locally for testing purposes.
 
 ---
