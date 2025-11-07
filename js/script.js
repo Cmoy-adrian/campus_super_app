@@ -289,10 +289,16 @@ let posts = JSON.parse(localStorage.getItem("forum_posts")) || [
         category: "General",
         body: "This is a sample post to show how posts will appear here.",
         time: new Date().toLocaleString(),
-        upvotes: 0,
+        likes: 0,
         comments: []
     }
 ];
+
+// Fix corrupted or missing data from old versions
+posts.forEach(post => {
+    if (typeof post.likes !== "number") post.likes = 0;
+    if (!Array.isArray(post.comments)) post.comments = [];
+});
 
 // Saves post to local storage
 function savePosts() {
@@ -317,7 +323,7 @@ document.getElementById("postForm").addEventListener("submit", function(e) {
         category,
         body,
         time: new Date().toLocaleString(),
-        upvotes: 0,
+        likes: 0,
         comments: []
     };
 
@@ -332,68 +338,114 @@ document.getElementById("postForm").addEventListener("submit", function(e) {
     document.getElementById("postForm").reset();
 });
 
-// Function to render user made posts
+// Function to create posts
+function createPostCard(post, index) {
+    const card = document.createElement("div");
+    card.classList = "card p-3 mb-3 border-dark border-3";
+
+    card.innerHTML = `
+        <h4>${post.title}</h4>
+        <p class="text-muted mb-1">
+            Posted by <strong>${post.user}</strong> in <em>${post.category}</em>
+        </p>
+        <p class="text-muted">${post.time}</p>
+        <p>${post.body}</p>
+
+        <!-- Likes -->
+        <button class="btn btn-sm btn-outline-primary like-btn" data-index="${index}">
+            👍 Likes - ${post.likes}
+        </button>
+
+        <!-- Comments -->
+        <div class="mt-3">
+            <h6>Comments</h6>
+            <div class="comment-list">
+                ${post.comments.map(c => `<p class="mb-1">• ${c}</p>`).join("")}
+            </div>
+
+            <input type="text" class="form-control form-control-sm mt-2 comment-input"
+                placeholder="Write a comment..." data-index="${index}">
+        </div>
+    `;
+
+    return card;
+}
+
+// Function to render posts
 function renderPosts() {
     const container = document.getElementById("post_list");
     container.innerHTML = "";
 
     posts.forEach((post, index) => {
-        const card = document.createElement("div");
-        card.classList = "card p-3 mb-3 border-dark border-3";
+        container.appendChild(createPostCard(post, index));
+    });
 
-        // Formatting of posts
-        card.innerHTML = `
-            <h4>${post.title}</h4>
-            <p class="text-muted mb-1">
-                Posted by <strong>${post.user}</strong>
-                in <em>${post.category}</em>
-            </p>
-            <p class="text-muted">${post.time}</p>
-            <p>${post.body}</p>
+    attachPostEventHandlers();
+}
 
-            <!-- Upvote Button -->
-            <button class="btn btn-outline-dark btn-sm mb-2" onclick="upvote(${index})">
-                👍 ${post.upvotes}
-            </button>
+// Attach Like + Comment Handler
+function attachPostEventHandlers() {
+    // Likes
+    document.querySelectorAll(".like-btn").forEach(btn => {
+        btn.addEventListener("click", function() {
+            const i = this.dataset.index;
+            posts[i].likes++;
+            savePosts();
+            renderPosts();
+            displaySearchResults(searchPosts(document.getElementById("forum_search").value));
+        });
+    });
 
-            <!-- Comment Section -->
-            <div class="mt-3">
-                <h6>Comments</h6>
-                <div id="comments_${index}">
-                    ${post.comments.map(c => `<p class="ms-3">• ${c}</p>`).join("")}
-                </div>
+    // Comments
+    document.querySelectorAll(".comment-input").forEach(input => {
+        input.addEventListener("keypress", function(e) {
+            if (e.key === "Enter" && this.value.trim() !== "") {
+                const i = this.dataset.index;
+                posts[i].comments.push(this.value.trim());
+                savePosts();
+                this.value = "";
 
-                <input id="comment_input_${index}" 
-                       class="form-control form-control-sm mt-2" 
-                       placeholder="Add a comment...">
-
-                <button class="btn btn-secondary btn-sm mt-2" onclick="addComment(${index})">
-                    Post Comment
-                </button>
-            </div>
-        `;
-
-        container.appendChild(card);
+                renderPosts();
+                displaySearchResults(searchPosts(document.getElementById("forum_search").value));
+            }
+        });
     });
 }
 
-// Function for upvotes
-function upvote(index) {
-    posts[index].upvotes++;
-    savePosts();
-    renderPosts();
+// Search function for forums
+function searchPosts(query) {
+    query = query.toLowerCase().trim();
+    if (query === "") return [];
+
+    return posts.filter(post =>
+        post.title.toLowerCase().includes(query) ||
+        post.body.toLowerCase().includes(query) ||
+        post.user.toLowerCase().includes(query) ||
+        post.category.toLowerCase().includes(query)
+    );
 }
 
-// Function for comments
-function addComment(index) {
-    const input = document.getElementById(`comment_input_${index}`);
-    const text = input.value.trim();
+// Function to display relevant posts
+function displaySearchResults(results) {
+    const container = document.getElementById("search_results");
+    container.innerHTML = "";
 
-    if (!text) return;
+    if (results.length === 0) {
+        container.innerHTML = "<p class='text-muted'>No matching posts.</p>";
+        return;
+    }
 
-    posts[index].comments.push(text);
-    savePosts();
-    renderPosts();
+    results.forEach(post => {
+        const index = posts.indexOf(post); // get real index for likes/comments
+        container.appendChild(createPostCard(post, index));
+    });
+
+    attachPostEventHandlers();
 }
+
+document.getElementById("forum_search").addEventListener("input", function() {
+    const results = searchPosts(this.value);
+    displaySearchResults(results);
+});
 
 //////////////////////////////////////////////
