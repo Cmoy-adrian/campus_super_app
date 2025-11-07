@@ -29,3 +29,19 @@ footer {
     text-decoration: none !important;
 }
 
+/*Carousel Features*/
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(1);
+}
+
+.carousel-indicators [data-bs-target] {
+    background-color: white;
+}
+
+.caption-bg {
+    background: rgba(0, 0, 0, 0.5); /* black with 50% transparency */
+    padding: 15px 20px;
+    border-radius: 10px; /* optional */
+}
+
