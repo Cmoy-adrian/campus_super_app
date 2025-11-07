@@ -217,13 +217,34 @@ document.addEventListener('DOMContentLoaded', function() {
             week: 'Week',
             day: 'Day'
         },
+
+        
         
         events: [ //Future Events added here for testing
             {
                 title: 'Monkey Bread!',
-                date: '2025-11-15'
+                date: '2025-11-15',
+                diningHall: 'Main Dining Hall',
+                description: 'Fresh baked Monkey Bread served warm!',
             },
-        ]
+        ],
+
+        eventDidMount: function(info) {
+            const hall = info.event.extendedProps.diningHall;
+            const desc = info.event.extendedProps.description;
+
+            const tooltipText = `
+                <b>${hall}</b><br>
+                ${desc}
+            `;
+
+            info.el.setAttribute('data-bs-toggle', 'tooltip');
+            info.el.setAttribute('data-bs-placement', 'top');
+            info.el.setAttribute('data-bs-html', 'true');
+            info.el.setAttribute('title', tooltipText);
+
+            new bootstrap.Tooltip(info.el);
+        }
 
     });
 
