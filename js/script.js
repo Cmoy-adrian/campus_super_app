@@ -484,7 +484,9 @@ document.addEventListener("keydown", function (e) {
 
     // Check if it matches
     if (konamiSequence.join("") === konamiCode.join("")) {
-        // Redirect to secret page
-        window.location.href = "secret.html";
+        // Save unlock so secret page becomes accessible
+        sessionStorage.setItem("konamiUnlocked", "true");
+
+        window.location.href = "hidden-zone-92a7.html";
     }
 });
