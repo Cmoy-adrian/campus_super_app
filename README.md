@@ -32,6 +32,7 @@ The purpose of the project is to simplify campus navigation, improve student eng
 * Student Forms
    * Create & view posts.
    * Comment & like posts.
+   * Search for specific posts within the Forums.
    * Posts are stored locally for testing purposes.
 
 ---
