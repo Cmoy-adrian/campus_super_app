@@ -1,147 +1,153 @@
 console.log("Script loaded");
 
+// Error Preventer
+function exists(id) {
+    return document.getElementById(id);
+}
+
 //////////////////////////////////////////////
 
 //Map loader
-window.onload = function() {
-    mapboxgl.accessToken = 'pk.eyJ1IjoiY21veTA3IiwiYSI6ImNtaG1pbzYybjBldGIyanB2cWc5d3I2bWwifQ.Dt6Kn6SgzBmKqw4rPx1T_A';
+document.addEventListener("DOMContentLoaded", function () {
+    if (exists("map")) {
+        mapboxgl.accessToken = 'pk.eyJ1IjoiY21veTA3IiwiYSI6ImNtaG1pbzYybjBldGIyanB2cWc5d3I2bWwifQ.Dt6Kn6SgzBmKqw4rPx1T_A';
 
-    const map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v12',
-        center: [-84.059, 41.899], // Cords for center of AC
-        zoom: 14
-    });
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v12',
+            center: [-84.059, 41.899],
+            zoom: 14
+        });
 
-    // Add zoom + rotate controls
-    map.addControl(new mapboxgl.NavigationControl());
+        map.addControl(new mapboxgl.NavigationControl());
 
-    // Optional: marker
-    new mapboxgl.Marker()
-        .setLngLat([-84.059, 41.899])
-        .setPopup(new mapboxgl.Popup().setHTML("<h4>Adrian College</h4>"))
-        .addTo(map);
-};
+        new mapboxgl.Marker()
+            .setLngLat([-84.059, 41.899])
+            .setPopup(new mapboxgl.Popup().setHTML("<h4>Adrian College</h4>"))
+            .addTo(map);
+    }
+});
 
 //////////////////////////////////////////////
 
 // EVENT Calendar Initialization
 document.addEventListener('DOMContentLoaded', function() {
+    if (exists("event_calendar")) {
+        const calendarEl = document.getElementById('event_calendar');
 
-    const calendarEl = document.getElementById('event_calendar');
-
-    const calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        headerToolbar: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        },
-        
-        buttonText: {
-            today: 'Today',
-            month: 'Month',
-            week: 'Week',
-            day: 'Day'
-        },
-        
-        events: [ //Events that show up on calendar
-            {
-                title: 'Math Club Meeting',
-                start: '2025-11-15T14:00',
-                end:  '2025-11-15T16:00',
-                description: 'Meetings held every week. Join if you like to stretch your math mind!',
-                hostProfile: 'Current Math Grads',
-                hostContact: 'Curr_Math_Grads@university.edu',
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
             },
-            {
-                title: 'Basketball Game', 
-                start: '2025-11-21T19:30',
-                description: 'Come watch the warthogs play against the reigning champs: the Bumblebees! Concessions are available on the stadiums main floor.',
-                hostProfile: 'Campus Sports',
-                hostContact: 'sports@university.edu',
+            
+            buttonText: {
+                today: 'Today',
+                month: 'Month',
+                week: 'Week',
+                day: 'Day'
             },
-            {
-                title: 'Halloween Celebration', 
-                start: '2025-10-31',
-                description: 'This year we are celebrating halloween with a scavenger hunt & trick or treating!',
-                hostProfile: 'Campus Festivities',
-                hostContact: 'festivities@university.edu',
-            },
-            {
-                title: 'Dios de Los Muertos', 
-                start: '2025-11-01',
-                end: '2025-11-02T11:59',
-                description: 'Celebrate the Day of The Dead with us!',
-                hostProfile: 'Campus Festivities',
-                hostContact: 'festivities@university.edu',
-            },
-            {
-                title: 'Winter Festival', 
-                start: '2025-12-12',
-                end: '2025-12-15T11:59',
-                description: 'Join us for games, food, and other festivities as we celebrate the winter season!',
-                hostProfile: 'Campus Festivities',
-                hostContact: 'festivities@university.edu',
-            },
-        ],
+            
+            events: [ //Events that show up on calendar
+                {
+                    title: 'Math Club Meeting',
+                    start: '2025-11-15T14:00',
+                    end:  '2025-11-15T16:00',
+                    description: 'Meetings held every week. Join if you like to stretch your math mind!',
+                    hostProfile: 'Current Math Grads',
+                    hostContact: 'Curr_Math_Grads@university.edu',
+                },
+                {
+                    title: 'Basketball Game', 
+                    start: '2025-11-21T19:30',
+                    description: 'Come watch the warthogs play against the reigning champs: the Bumblebees! Concessions are available on the stadiums main floor.',
+                    hostProfile: 'Campus Sports',
+                    hostContact: 'sports@university.edu',
+                },
+                {
+                    title: 'Halloween Celebration', 
+                    start: '2025-10-31',
+                    description: 'This year we are celebrating halloween with a scavenger hunt & trick or treating!',
+                    hostProfile: 'Campus Festivities',
+                    hostContact: 'festivities@university.edu',
+                },
+                {
+                    title: 'Dios de Los Muertos', 
+                    start: '2025-11-01',
+                    end: '2025-11-02T11:59',
+                    description: 'Celebrate the Day of The Dead with us!',
+                    hostProfile: 'Campus Festivities',
+                    hostContact: 'festivities@university.edu',
+                },
+                {
+                    title: 'Winter Festival', 
+                    start: '2025-12-12',
+                    end: '2025-12-15T11:59',
+                    description: 'Join us for games, food, and other festivities as we celebrate the winter season!',
+                    hostProfile: 'Campus Festivities',
+                    hostContact: 'festivities@university.edu',
+                },
+            ],
 
-        // Connect Calendar to Info Panel.
-        eventClick: function (info) {
-            info.jsEvent.preventDefault();
+            // Connect Calendar to Info Panel.
+            eventClick: function (info) {
+                info.jsEvent.preventDefault();
 
-            // Format start & end times
-            const start = info.event.start;
-            const end = info.event.end;
+                // Format start & end times
+                const start = info.event.start;
+                const end = info.event.end;
 
-            const formatOptions = {
-                weekday: 'short',
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: '2-digit'
-            };
+                const formatOptions = {
+                    weekday: 'short',
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: '2-digit'
+                };
 
-            const startStr = start ? start.toLocaleString([], formatOptions) : "No start time";
-            const endStr   = end ? end.toLocaleString([], formatOptions) : "No end time specified";
+                const startStr = start ? start.toLocaleString([], formatOptions) : "No start time";
+                const endStr   = end ? end.toLocaleString([], formatOptions) : "No end time specified";
 
-            // Summary tab
-            const summaryHTML = `
-                <strong>${info.event.title}</strong><br>
-                <strong>Starts:</strong> ${startStr}<br>
-                <strong>Ends:</strong> ${endStr}<br><br>
-                <strong>Description:</strong><br>
-                ${info.event.extendedProps.description ?? 'No description provided.'}
-            `;
+                // Summary tab
+                const summaryHTML = `
+                    <strong>${info.event.title}</strong><br>
+                    <strong>Starts:</strong> ${startStr}<br>
+                    <strong>Ends:</strong> ${endStr}<br><br>
+                    <strong>Description:</strong><br>
+                    ${info.event.extendedProps.description ?? 'No description provided.'}
+                `;
 
-            document.querySelector('#summary-tab-pane').innerHTML = summaryHTML;
+                document.querySelector('#summary-tab-pane').innerHTML = summaryHTML;
 
-            // Host Profile tab
-            const profileHTML = `
-                <strong>Host Profile</strong><br><br>
-                ${info.event.extendedProps.hostProfile ?? 'No host profile available.'}
-            `;
+                // Host Profile tab
+                const profileHTML = `
+                    <strong>Host Profile</strong><br><br>
+                    ${info.event.extendedProps.hostProfile ?? 'No host profile available.'}
+                `;
 
-            document.querySelector('#profile-tab-pane').innerHTML = profileHTML;
+                document.querySelector('#profile-tab-pane').innerHTML = profileHTML;
 
-            // Host Contact tab
-            const contactHTML = `
-                <strong>Contact Information</strong><br><br>
-                ${info.event.extendedProps.hostContact ?? 'No contact information available.'}
-            `;
+                // Host Contact tab
+                const contactHTML = `
+                    <strong>Contact Information</strong><br><br>
+                    ${info.event.extendedProps.hostContact ?? 'No contact information available.'}
+                `;
 
-            document.querySelector('#contact-tab-pane').innerHTML = contactHTML;
+                document.querySelector('#contact-tab-pane').innerHTML = contactHTML;
 
-            // Switch to Summary tab
-            const trigger = document.querySelector('#summary-tab');
-            const tab = new bootstrap.Tab(trigger);
-            tab.show();
-        }
+                // Switch to Summary tab
+                const trigger = document.querySelector('#summary-tab');
+                const tab = new bootstrap.Tab(trigger);
+                tab.show();
+            }
 
-    });
+        });
 
-    calendar.render();
+        calendar.render();
+    }
 
     // Auto-fill End Date/Time Function
     function updateEndFields() {
@@ -158,11 +164,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Listen for start date/time changes
-    document.getElementById('event_start_date').addEventListener('change', updateEndFields);
-    document.getElementById('event_start_time').addEventListener('change', updateEndFields);
+    const startDate = document.getElementById('event_start_date');
+    if (startDate) startDate.addEventListener('change', updateEndFields);
+
+    const startTime = document.getElementById('event_start_time');
+    if (startTime) startTime.addEventListener('change', updateEndFields);
 
     // Add Event Form (Button functionality)
-    document.getElementById('add_event_btn').addEventListener('click', function () {
+    const addEventBtn = document.getElementById('add_event_btn');
+    if (addEventBtn) addEventBtn.addEventListener('click', function () {
         const title = document.getElementById('event_title').value;
 
         const startDate = document.getElementById('event_start_date').value;
@@ -206,77 +216,78 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // DINING Calendar Initialization
 document.addEventListener('DOMContentLoaded', function() {
+    if (exists("dining_calendar")) {
+        const calendarEl = document.getElementById('dining_calendar');
 
-    const calendarEl = document.getElementById('dining_calendar');
-
-    const calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        headerToolbar: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        },
-        
-        buttonText: {
-            today: 'Today',
-            month: 'Month',
-            week: 'Week',
-            day: 'Day'
-        },
-
-        
-        
-        events: [ // Events that show up on the calendar
-            {
-                title: 'Monkey Bread!',
-                date: '2025-11-15',
-                diningHall: 'Main Dining Hall',
-                description: 'Fresh baked Monkey Bread served warm!',
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
             },
-            {
-                title: 'Chicken Alfredo',
-                date: '2025-11-22',
-                diningHall: 'North Hall',
-                description: 'Creamy Alfredo served fresh.',
+            
+            buttonText: {
+                today: 'Today',
+                month: 'Month',
+                week: 'Week',
+                day: 'Day'
             },
-            {
-                title: 'Spaghetti',
-                date: '2025-11-25',
-                diningHall: 'South Hall',
-                description: 'Spaghetti served with homemade meat sauce.',
+
+            
+            
+            events: [ // Events that show up on the calendar
+                {
+                    title: 'Monkey Bread!',
+                    date: '2025-11-15',
+                    diningHall: 'Main Dining Hall',
+                    description: 'Fresh baked Monkey Bread served warm!',
+                },
+                {
+                    title: 'Chicken Alfredo',
+                    date: '2025-11-22',
+                    diningHall: 'North Hall',
+                    description: 'Creamy Alfredo served fresh.',
+                },
+                {
+                    title: 'Spaghetti',
+                    date: '2025-11-25',
+                    diningHall: 'South Hall',
+                    description: 'Spaghetti served with homemade meat sauce.',
+                },
+            ],
+
+            // Changes event color depending on hall
+            eventClassNames: function(arg) {
+                const hall = arg.event.extendedProps.diningHall;
+                if (hall === 'Main Dining Hall') return ['event-main'];
+                if (hall === 'North Hall') return ['event-north'];
+                if (hall == 'South Hall') return ['event-south'];
+                return [];
             },
-        ],
 
-        // Changes event color depending on hall
-        eventClassNames: function(arg) {
-            const hall = arg.event.extendedProps.diningHall;
-            if (hall === 'Main Dining Hall') return ['event-main'];
-            if (hall === 'North Hall') return ['event-north'];
-            if (hall == 'South Hall') return ['event-south'];
-            return [];
-        },
+            // Adds pop-up when hovering over event
+            eventDidMount: function(info) {
+                const hall = info.event.extendedProps.diningHall;
+                const desc = info.event.extendedProps.description;
 
-        // Adds pop-up when hovering over event
-        eventDidMount: function(info) {
-            const hall = info.event.extendedProps.diningHall;
-            const desc = info.event.extendedProps.description;
+                const tooltipText = `
+                    <b>${hall}</b><br>
+                    ${desc}
+                `;
 
-            const tooltipText = `
-                <b>${hall}</b><br>
-                ${desc}
-            `;
+                info.el.setAttribute('data-bs-toggle', 'tooltip');
+                info.el.setAttribute('data-bs-placement', 'top');
+                info.el.setAttribute('data-bs-html', 'true');
+                info.el.setAttribute('title', tooltipText);
 
-            info.el.setAttribute('data-bs-toggle', 'tooltip');
-            info.el.setAttribute('data-bs-placement', 'top');
-            info.el.setAttribute('data-bs-html', 'true');
-            info.el.setAttribute('title', tooltipText);
+                new bootstrap.Tooltip(info.el);
+            }
 
-            new bootstrap.Tooltip(info.el);
-        }
+        });
 
-    });
-
-    calendar.render();
+        calendar.render();
+    }
 });
 
 //////////////////////////////////////////////
@@ -305,38 +316,40 @@ function savePosts() {
     localStorage.setItem("forum_posts", JSON.stringify(posts));
 };
 
-renderPosts();
+if (exists("post_list")) renderPosts();
 
 // Handle form submit
-document.getElementById("postForm").addEventListener("submit", function(e) {
-    e.preventDefault();
+if (exists("postForm")) {
+    document.getElementById("postForm").addEventListener("submit", function(e) {
+        e.preventDefault();
 
-    const title = document.getElementById("post_title").value;
-    const user = document.getElementById("post_user").value;
-    const category = document.getElementById("post_category").value;
-    const body = document.getElementById("post_body").value;
+        const title = document.getElementById("post_title").value;
+        const user = document.getElementById("post_user").value;
+        const category = document.getElementById("post_category").value;
+        const body = document.getElementById("post_body").value;
 
-    // Create post object
-        const post = {
-        title,
-        user,
-        category,
-        body,
-        time: new Date().toLocaleString(),
-        likes: 0,
-        comments: []
-    };
+        // Create post object
+            const post = {
+            title,
+            user,
+            category,
+            body,
+            time: new Date().toLocaleString(),
+            likes: 0,
+            comments: []
+        };
 
-    posts.unshift(post); // new posts appear at top
-    savePosts();
-    renderPosts();
+        posts.unshift(post); // new posts appear at top
+        savePosts();
+        renderPosts();
 
-    // Re-render posts
-    renderPosts();
+        // Re-render posts
+        renderPosts();
 
-    // Reset form fields
-    document.getElementById("postForm").reset();
-});
+        // Reset form fields
+        document.getElementById("postForm").reset();
+    });
+}
 
 // Function to create posts
 function createPostCard(post, index) {
@@ -353,7 +366,7 @@ function createPostCard(post, index) {
 
         <!-- Likes -->
         <button class="btn btn-sm btn-outline-primary like-btn" data-index="${index}">
-            👍 Likes - ${post.likes}
+            Likes - ${post.likes}
         </button>
 
         <!-- Comments -->
@@ -443,9 +456,35 @@ function displaySearchResults(results) {
     attachPostEventHandlers();
 }
 
-document.getElementById("forum_search").addEventListener("input", function() {
-    const results = searchPosts(this.value);
-    displaySearchResults(results);
-});
+if (exists("forum_search")) {
+    document.getElementById("forum_search").addEventListener("input", function() {
+        const results = searchPosts(this.value);
+        displaySearchResults(results);
+    });
+}
 
 //////////////////////////////////////////////
+
+let konamiSequence = [];
+const konamiCode = [
+    "ArrowUp", "ArrowUp",
+    "ArrowDown", "ArrowDown",
+    "ArrowLeft", "ArrowRight",
+    "ArrowLeft", "ArrowRight",
+    "b", "a", "Enter"
+];
+
+document.addEventListener("keydown", function (e) {
+    konamiSequence.push(e.key);
+
+    // Keep only last 10 inputs
+    if (konamiSequence.length > konamiCode.length) {
+        konamiSequence.shift();
+    }
+
+    // Check if it matches
+    if (konamiSequence.join("") === konamiCode.join("")) {
+        // Redirect to secret page
+        window.location.href = "secret.html";
+    }
+});
