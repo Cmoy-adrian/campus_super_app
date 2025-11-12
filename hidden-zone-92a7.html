@@ -123,6 +123,8 @@
                     fetch("https://deckofcardsapi.com/api/deck/new/shuffle/")
                     .then(res => res.json())
                     .then(data => {
+                        console.log("Deck API response:", data);
+
                         deckId = data.deck_id;
                         drawCard(true);
                     });
