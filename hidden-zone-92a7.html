@@ -148,6 +148,10 @@
                 function checkGuess(newValue) {
                     let guessCorrect = false;
 
+                    if (newValue === currentCardValue) {
+                        guessCorrect = true;
+                    }
+
                     if (newValue > currentCardValue && lastGuess === "higher") guessCorrect = true;
                     if (newValue < currentCardValue && lastGuess === "lower") guessCorrect = true;
 
