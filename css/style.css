@@ -16,6 +16,34 @@ footer {
 /*Calendar formatting CSS*/
 #calendar_container {
     padding: 20px;
+    width: 700px;
+    height: 630px;
+    overflow-y: auto;    /* Vertical scroll */
+    overflow-x: hidden;  /* Prevent sideways scroll */
+}
+
+#event_calendar {
+    width: 100% !important;
+}
+
+/* Mobile screens (Bootstrap style: under 768px) */
+@media (max-width: 768px) {
+    #calendar_container {
+        width: auto;
+        height: 550px;
+        overflow-y: auto;    /* Add scroll if needed */
+        padding: 20px;       /* Optional: more spacing */
+    }
+
+    #event_calendar {
+        width: 100% !important;   /* Make calendar fit mobile width */
+        height: 350px !important; /* Set calendar height */
+    }
+}
+
+/* Allows scrolling*/
+.fc-scrollgrid {
+    overflow-y: auto !important;
 }
 
 /* Weekday header text */
@@ -29,6 +57,15 @@ footer {
 .fc .fc-daygrid-day-number {
     color: #000 !important;
     text-decoration: none !important;
+}
+
+/* Mobile screens calendar formatting*/
+@media (max-width: 768px) {
+
+        /* 80% size of whatever desktop uses */
+    .fc {
+        font-size: 0.8em !important;
+    }
 }
 
 /*Dining calendar dynamic coloring CSS*/
@@ -66,3 +103,12 @@ footer {
     border-radius: 10px; /* optional */
 }
 
+/*Map Formatting */
+#map {
+    height: 700px
+}
+@media (max-width: 768px) {
+    #map {
+        height: 500px
+    }
+}

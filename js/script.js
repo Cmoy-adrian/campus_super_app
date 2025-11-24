@@ -36,20 +36,28 @@ document.addEventListener('DOMContentLoaded', function() {
         const calendarEl = document.getElementById('event_calendar');
 
         const calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
+            initialView: window.innerWidth < 768 ? 'dayGridMonth' : 'dayGridMonth',
+
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek,timeGridDay'
             },
-            
+
             buttonText: {
                 today: 'Today',
                 month: 'Month',
                 week: 'Week',
                 day: 'Day'
             },
-            
+
+            // Responsiveness settings
+            height: "auto",
+            contentHeight: "auto",
+            expandRows: true,
+            handleWindowResize: true,
+            windowResizeDelay: 75, // prevents jittering
+
             events: [ //Events that show up on calendar
                 {
                     title: 'Math Club Meeting',
@@ -220,19 +228,27 @@ document.addEventListener('DOMContentLoaded', function() {
         const calendarEl = document.getElementById('dining_calendar');
 
         const calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
+            initialView: window.innerWidth < 768 ? 'dayGridMonth' : 'dayGridMonth',
+
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek,timeGridDay'
             },
-            
+
             buttonText: {
                 today: 'Today',
                 month: 'Month',
                 week: 'Week',
                 day: 'Day'
             },
+
+            // Responsiveness settings
+            height: "auto",
+            contentHeight: "auto",
+            expandRows: true,
+            handleWindowResize: true,
+            windowResizeDelay: 75, // prevents jittering
 
             
             

@@ -135,15 +135,17 @@
 
         <!--Calendar, Event Info, & Info Tabs-->
         <section>
-            <div id="calendar_layout" class="container-fluid">
-                <div class="row mb-4">
+            <div id="calendar_layout" class="container my-4">
+                <div class="row g-4">
                     <!--Interactive Calendar-->
-                    <div id="calendar_container" class="col bg-body-secondary border rounded border-dark border-4 ms-4">
-                        <div id="event_calendar"></div>
+                    <div class="col">
+                        <div id="calendar_container" class="bg-body-secondary border rounded border-dark border-4 p-3">
+                            <div id="event_calendar" class="w-100"></div>
+                        </div>
                     </div>
 
                     <!--Interactive event info & tabs-->
-                    <div id="event_info" class="col">
+                    <div id="event_info" class="col mb-4">
                         <h3>Event Info</h3>
                         <nav id="event_info_tabs">
                             <!--Tab Panels-->
@@ -160,7 +162,7 @@
                             </ul>
 
                             <!--Tab Content-->
-                            <div class="container-fluid bg-body-secondary border rounded border-dark border-4 py-2" style="width: 700px; height: 600px;">
+                            <div class="container-fluid bg-body-secondary border rounded border-dark border-4 py-2">
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active" id="summary-tab-pane" role="tabpanel" aria-labelledby="summary-tab" tabindex="0">
                                         <p>...</p>
