@@ -387,7 +387,7 @@ function createPostCard(post, index) {
 
         <!-- Comments -->
         <div class="mt-3">
-            <h6>Comments</h6>
+            <h4 class="fs-6">Comments</h4>
             <div class="comment-list">
                 ${post.comments.map(c => `<p class="mb-1">• ${c}</p>`).join("")}
             </div>
